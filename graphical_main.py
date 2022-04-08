@@ -62,21 +62,21 @@ class Graph:
 
 
 if __name__ == "__main__":
-        city_graph = Graph((Vertex("Seattle", (0, 0)), 
-                            Vertex("San Francisco", (0, 0)),
-                            Vertex("Los Angeles", (0, 0)),
-                            Vertex("Riverside", (0, 0)),
-                            Vertex("Phoenix", (0, 0)),
-                            Vertex("Chicago", (0, 0)),
-                            Vertex("Boston", (0, 0)),
-                            Vertex("New York", (0, 0)),
-                            Vertex("Atlanta", (0, 0)),
-                            Vertex("Miami", (0, 0)),
-                            Vertex("Dallas", (0, 0)),
-                            Vertex("Houston", (0, 0)),
-                            Vertex("Washington", (0, 0)),
-                            Vertex("Detroit", (0, 0)),
-                            Vertex("Philadelphia", (0, 0)),
+        city_graph = Graph((Vertex("Seattle", (9, 7)), 
+                            Vertex("San Francisco", (3, 38)),
+                            Vertex("Los Angeles", (8, 51)),
+                            Vertex("Riverside", (13, 51)),
+                            Vertex("Phoenix", (20, 57)),
+                            Vertex("Chicago", (65, 33)),
+                            Vertex("Boston", (94, 25)),
+                            Vertex("New York", (89, 30)),
+                            Vertex("Atlanta", (73, 58)),
+                            Vertex("Miami", (84, 82)),
+                            Vertex("Dallas", (49, 63)),
+                            Vertex("Houston", (52, 72)),
+                            Vertex("Washington", (85, 37)),
+                            Vertex("Detroit", (73, 30)),
+                            Vertex("Philadelphia", (87, 34)),
                         ))
         city_graph.add_edge_by_vertices("Seattle", "Chicago")
         city_graph.add_edge_by_vertices("Seattle", "San Francisco")
@@ -114,7 +114,7 @@ if __name__ == "__main__":
             solution = node_to_path(bfs_result)
             print(solution)
 
-        screen = pg.display.set_mode((1280, 720), vsync=1)
+        screen = pg.display.set_mode((1280, 720))
         clock = pg.time.Clock()
 
         # creating the game logic / environment sample
@@ -132,7 +132,8 @@ if __name__ == "__main__":
                 if event.type == pg.QUIT:
                     exit()
 
-            
+            for vert in city_graph._vertices:
+                pg.draw.circle(screen, "black", vert.pos, 5)
 
             pg.display.set_caption("$~Graph ~fps: " + str(round(clock.get_fps(), 2)))
 
