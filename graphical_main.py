@@ -124,7 +124,7 @@ if __name__ == "__main__":
         # main cycle
         while True:
             # surfaces cleaning
-            screen.fill((140, 140, 140))
+            screen.fill("white")
             
             # checking for keyboard, window, mouse inputs or events
             keys = pg.key.get_pressed()
@@ -133,7 +133,22 @@ if __name__ == "__main__":
                     exit()
 
             for vert in city_graph._vertices:
-                pg.draw.circle(screen, "black", vert.pos, 5)
+                pg.draw.circle(screen, "blue", (vert.pos[0] * 5 + 320, vert.pos[1] * 5 + 180), 5)
+            
+            for edges in city_graph._edges:
+                for edge in edges:
+                    x = city_graph._vertices[edge.u].pos
+                    y = city_graph._vertices[edge.v].pos
+                    pg.draw.line(screen, "green", (x[0] * 5 + 320, x[1] * 5 + 180), (y[0] * 5 + 320, y[1] * 5 + 180), 1)
+
+            if bfs_result is not None:
+                x = city_graph._vertices[city_graph._vertices.index(solution[0])].pos
+                y = city_graph._vertices[city_graph._vertices.index(solution[1])].pos
+                pg.draw.line(screen, "red", (x[0] * 5 + 320, x[1] * 5 + 180), (y[0] * 5 + 320, y[1] * 5 + 180), 1)
+                for i in range(1, len(solution) - 1):
+                    x = solution[i].pos
+                    y = solution[i + 1].pos
+                    pg.draw.line(screen, "red", (x[0] * 5 + 320, x[1] * 5 + 180), (y[0] * 5 + 320, y[1] * 5 + 180), 1)
 
             pg.display.set_caption("$~Graph ~fps: " + str(round(clock.get_fps(), 2)))
 
